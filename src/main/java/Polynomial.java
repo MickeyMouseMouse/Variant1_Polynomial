@@ -16,6 +16,17 @@ public final class Polynomial {
     // Коэффициенты идут по убыванию степеней
     private ArrayList<Double> coeff = new ArrayList<>();
 
+    // Шаблон по умолчанию для вывода вещественных чисел
+    private String pattern = "#0.0";
+
+    // Установка нужного шаблона для вывода вещественных чисел
+    public void setPattern(String str) {
+        if (str.matches("#0+.0+"))
+            pattern = str;
+        else
+            throw new IllegalArgumentException("Invalid string for pattern");
+    }
+
     // Приватный метод для удаления ненужных нулевых коэффициентов спереди
     private void deleteNeedlessZeros(ArrayList<Double> array) {
         while (!array.isEmpty())
@@ -125,7 +136,6 @@ public final class Polynomial {
     // Вывод полинома в привычном виде (можно задать шаблон вывода вещественных чисел)
     @Override
     public String toString() {
-        final String pattern = "#0.0";
         StringBuilder string = new StringBuilder();
 
         for (int i = 0; i < coeff.size(); i++) {

@@ -18,6 +18,9 @@ public class Tests
         Polynomial p2 = new Polynomial("1 2 3");
 
         System.out.println(p1.toString());
+
+        // Задание нужного шаблона для вывода вещественных чисел
+        p2.setPattern("#0.000");
         System.out.println(p2.toString());
 
         // Проверка выкидывания ошибки при введении неправильной строки
