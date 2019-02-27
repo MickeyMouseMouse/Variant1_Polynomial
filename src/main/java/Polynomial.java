@@ -20,9 +20,9 @@ public final class Polynomial {
     private String pattern = "#0.0";
 
     // Установка нужного шаблона для вывода вещественных чисел
-    public void setPattern(String str) {
-        if (str.matches("#0+.0+"))
-            pattern = str;
+    public void setPattern(String newPattern) {
+        if (newPattern.matches("#0+.0+"))
+            pattern = newPattern;
         else
             throw new IllegalArgumentException("Invalid string for pattern");
     }
@@ -169,16 +169,6 @@ public final class Polynomial {
         return coeff
                 .stream()
                 .reduce(0.0, (a, b) -> a + b * pow(x, i.getAndDecrement()));
-
-        /*
-        // Другой вариант
-        double result = 0;
-
-        for (int i = 0; i < coeff.size(); i++)
-            result += coeff.get(i) * pow(x, coeff.size() - 1 - i);
-
-        return result;
-        */
     }
 
     // Приватный метод для сложения и вычитания
