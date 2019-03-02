@@ -47,24 +47,26 @@ public final class Polynomial {
         if (coefficients.length() == 0) coeff.add(0.0);
         else {
             // Задана строка вида "1 2 3"
-            if (coefficients.matches("^((-|)[0-9]+([.,][0-9]+|))(( (-|)([0-9]+([.,][0-9]+|))|([0-9]+([.,][0-9]+|)))+|)")) {
+            if (coefficients.matches("^((-|)[0-9]+([.][0-9]+|))(( (-|)([0-9]+([.][0-9]+|))|([0-9]+([.][0-9]+|)))+|)")) {
                 for (String str : coefficients.split(" ")) {
                     double tmp = Double.parseDouble(str);
                     if (coeff.isEmpty() && tmp == 0.0) continue;
 
                     coeff.add(tmp);
                 }
-
-                if (coeff.isEmpty()) coeff.add(0.0);
             } else {
                 // Задана строка вида "x^3+1"
-                if (coefficients.matches("(((\\+|-|)([0-9]+([.,][0-9]+|)|)x(?!x)(\\^[0-9]+|))|((\\+|-|)([0-9]+([.,][0-9]+|))))+")) {
+                if (coefficients.matches("(((\\+|-|)([0-9]+([.][0-9]+|)|)x(?!x)(\\^[0-9]+|))|((\\+|-|)([0-9]+([.][0-9]+|))))+")) {
                     int i = 0;
                     int start = 0;
                     boolean fl = true;
                     while (i != coefficients.length() - 1) {
-                        while (coefficients.charAt(i) != 'x' && i != coefficients.length() - 1)
+                        while (coefficients.charAt(i) != 'x' && i != coefficients.length() - 1) {
                             i++;
+
+                            if (start != i && (coefficients.charAt(i) == '+' || coefficients.charAt(i) == '-'))
+                                throw new IllegalArgumentException("Invalid string for polynomial");
+                        }
 
                         double tmpCoeff = 0;
 
@@ -101,22 +103,28 @@ public final class Polynomial {
                                 tmpDegree = 1;
                         }
 
-                        if (coeff.size() <= tmpDegree + 1) {
-                            if (fl) {
-                                while (coeff.size() < tmpDegree + 1)
-                                    coeff.add(0.0);
+                        if(!(tmpCoeff == 0 && coeff.size() == 0)) {
+                            if (coeff.size() <= tmpDegree + 1 ||
+                                coeff.get(coeff.size() - tmpDegree - 1) != 0.0) {
+                                if (fl) {
+                                    while (coeff.size() < tmpDegree + 1)
+                                        coeff.add(0.0);
 
-                                fl = false;
-                            } else
-                                throw new IllegalArgumentException("Invalid string for polynomial");
+                                    fl = false;
+                                } else
+                                    throw new IllegalArgumentException("Invalid string for polynomial");
+                            }
+
+                            coeff.set(coeff.size() - tmpDegree - 1, tmpCoeff);
                         }
 
-                        coeff.set(coeff.size() - tmpDegree - 1, tmpCoeff);
                         start = i;
                     }
                 } else
                     throw new IllegalArgumentException("Invalid string for polynomial");
             }
+
+            if (coeff.isEmpty()) coeff.add(0.0);
         }
     }
 
