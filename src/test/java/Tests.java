@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Tests
 {
     @Test
-    public void createNewPolynomials()
-    {
+    public void createNewPolynomials() {
         // Создание полинома из ArrayList
         ArrayList<Double> array = new ArrayList<>();
         array.add(1.0);
@@ -25,12 +24,10 @@ public class Tests
 
         // Проверка выкидывания ошибки при введении неправильной строки
         boolean fl = false;
-        try
-        {
+        try {
             Polynomial p3 = new Polynomial("qwerty");
         }
-        catch (IllegalArgumentException e)
-        {
+        catch (IllegalArgumentException e) {
             fl = true;
         }
         assertEquals(true, fl);
@@ -41,8 +38,7 @@ public class Tests
     }
 
     @Test
-    public void compareEquals()
-    {
+    public void compareEquals() {
         // Равенство/неравенство двух полиномов
         Polynomial p1 = new Polynomial("1 2 3");
         Polynomial p2 = new Polynomial("1 2 3");
@@ -52,8 +48,7 @@ public class Tests
     }
 
     @Test
-    public void valueOfPolynomial()
-    {
+    public void valueOfPolynomial() {
         // Получение значения полинома при заданном x
         Polynomial p1 = new Polynomial("7 3 -6 1 -8");
         assertEquals(-3.0, p1.getValueWith(1), 0.0);
@@ -61,8 +56,7 @@ public class Tests
     }
 
     @Test
-    public void summationOfPolynomials()
-    {
+    public void summationOfPolynomials() {
         // Сумма двух полиномов
         Polynomial p1 = new Polynomial("1 2 3");
         Polynomial p2 = new Polynomial("-1 6 4");
@@ -74,8 +68,7 @@ public class Tests
     }
 
     @Test
-    public void subtractOfPolynomials()
-    {
+    public void subtractOfPolynomials() {
         // Разность двух полиномов
         Polynomial p1 = new Polynomial("4 5 2");
         Polynomial p2 = new Polynomial("-1 5 0");
@@ -87,8 +80,7 @@ public class Tests
     }
 
     @Test
-    public void multiplyOfPolynomials()
-    {
+    public void multiplyOfPolynomials() {
         // Умножение двух полиномов
         Polynomial p1 = new Polynomial("3 8 5");
         Polynomial p2 = new Polynomial("2 7");
@@ -100,8 +92,7 @@ public class Tests
     }
 
     @Test
-    public void integerPartOfDivision()
-    {
+    public void integerPartOfDivision() {
         // Получение целой части от деления двух полиномов
         Polynomial p1 = new Polynomial("1 2 3");
         Polynomial p2 = new Polynomial("-1 2 0");
@@ -109,20 +100,17 @@ public class Tests
 
         // Проверка выбрасывания ошибки при неверном формате аргумента mode
         boolean fl = false;
-        try
-        {
+        try {
             Polynomial p3 = p1.division(p2, 'q');
         }
-        catch (IllegalArgumentException e)
-        {
+        catch (IllegalArgumentException e) {
             fl = true;
         }
         assertEquals(true, fl);
     }
 
     @Test
-    public void remainderOfDivision()
-    {
+    public void remainderOfDivision() {
         // Получение остатка от деления двух полиномов
         Polynomial p1 = new Polynomial("5 -3 6");
         Polynomial p2 = new Polynomial("3 2");
