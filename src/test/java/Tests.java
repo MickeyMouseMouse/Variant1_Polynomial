@@ -1,12 +1,13 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tests {
     @Test
     public void createNewPolynomials() {
         // Создание полинома из ArrayList
-        ArrayList<Double> array = new ArrayList<>();
+        List<Double> array = new ArrayList<>();
         array.add(1.0);
         array.add(2.0);
         array.add(0.0);

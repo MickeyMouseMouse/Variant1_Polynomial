@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import static java.lang.Math.pow;
 import java.text.DecimalFormat;
@@ -14,7 +15,7 @@ import java.text.DecimalFormat;
 public final class Polynomial {
     // Массив с коэффициентами полинома
     // Коэффициенты идут по убыванию степеней
-    private ArrayList<Double> coeff = new ArrayList<>();
+    private List<Double> coeff = new ArrayList<>();
 
     // Шаблон по умолчанию для вывода вещественных чисел
     private String pattern = "#0.0";
@@ -28,7 +29,7 @@ public final class Polynomial {
     }
 
     // Приватный метод для удаления ненужных нулевых коэффициентов спереди
-    private void deleteNeedlessZeros(ArrayList<Double> array) {
+    private void deleteNeedlessZeros(List<Double> array) {
         while (!array.isEmpty())
             if (array.get(0) >= -0.001 && array.get(0) <= 0.001)
                 array.remove(0);
@@ -36,8 +37,8 @@ public final class Polynomial {
                 break;
     }
 
-    // Конструктор с инициализацией из ArrayList
-    Polynomial(ArrayList<Double> coefficients) {
+    // Конструктор с инициализацией из массива чисел
+    Polynomial(List<Double> coefficients) {
         deleteNeedlessZeros(coeff = new ArrayList<>(coefficients));
         if (coeff.size() == 0) coeff.add(0.0);
     }
@@ -188,8 +189,8 @@ public final class Polynomial {
         else
             sign = -1.0;
 
-        ArrayList<Double> coeffThis = new ArrayList<>(first.coeff);
-        ArrayList<Double> coeffOther = new ArrayList<>(second.coeff);
+        List<Double> coeffThis = new ArrayList<>(first.coeff);
+        List<Double> coeffOther = new ArrayList<>(second.coeff);
 
         while (coeffThis.size() > coeffOther.size())
             coeffOther.add(0, 0.0);
@@ -197,7 +198,7 @@ public final class Polynomial {
         while (coeffThis.size() < coeffOther.size())
             coeffThis.add(0, 0.0);
 
-        ArrayList<Double> answer = new ArrayList<>();
+        List<Double> answer = new ArrayList<>();
 
         for (int i = 0; i < coeffThis.size(); i++)
             answer.add(coeffThis.get(i) + sign * coeffOther.get(i));
@@ -219,10 +220,10 @@ public final class Polynomial {
 
     // Умножене двух полиномов (результат помещается в третий полином)
     Polynomial multiply(Polynomial other) {
-        ArrayList<Double> coeffThis = new ArrayList<>(coeff);
-        ArrayList<Double> coeffOther = new ArrayList<>(other.coeff);
+        List<Double> coeffThis = new ArrayList<>(coeff);
+        List<Double> coeffOther = new ArrayList<>(other.coeff);
 
-        ArrayList<Double> answer = new ArrayList<>();
+        List<Double> answer = new ArrayList<>();
 
         while (answer.size() <= other.coeff.size() + coeff.size() - 2)
             answer.add(0.0);
