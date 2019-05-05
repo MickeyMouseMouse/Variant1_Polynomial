@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 рассчитать значение при данном x, сложить/вычесть/умножить/поделить два полинома,
 найти остаток от деления одного полинома на другой.
 */
+
 public final class Polynomial {
     // Массив с коэффициентами полинома
     // Коэффициенты идут по убыванию степеней
@@ -28,7 +29,7 @@ public final class Polynomial {
             throw new IllegalArgumentException("Invalid string for pattern");
     }
 
-    // Приватный метод для удаления ненужных нулевых коэффициентов спереди
+    // Удаление ненужных нулевых коэффициентов спереди
     private void deleteNeedlessZeros(List<Double> array) {
         while (!array.isEmpty())
             if (array.get(0) >= -0.001 && array.get(0) <= 0.001)
@@ -38,13 +39,13 @@ public final class Polynomial {
     }
 
     // Конструктор с инициализацией из массива чисел
-    Polynomial(List<Double> coefficients) {
+    public Polynomial(List<Double> coefficients) {
         deleteNeedlessZeros(coeff = new ArrayList<>(coefficients));
         if (coeff.size() == 0) coeff.add(0.0);
     }
 
     // Конструктор с инициализацией из String (два вида строк)
-    Polynomial(String coefficients) {
+    public Polynomial(String coefficients) {
         if (coefficients.length() == 0) coeff.add(0.0);
         else {
             // Задана строка вида "1 2 3"
@@ -173,7 +174,7 @@ public final class Polynomial {
     }
 
     // Расчет значения полинома при заданном x
-    double getValueWith(double x) {
+    public double getValueWith(double x) {
         AtomicInteger i = new AtomicInteger(coeff.size() - 1);
         return coeff
                 .stream()
@@ -209,17 +210,17 @@ public final class Polynomial {
     }
 
     // Сложение двух полиномов (результат помещается в третий полином)
-    Polynomial plus(Polynomial other) {
+    public Polynomial plus(Polynomial other) {
         return plusAndMinus(this, other, true);
     }
 
     // Вычитание двух полиномов (результат помещается в третий полином)
-    Polynomial minus(Polynomial other) {
+    public Polynomial minus(Polynomial other) {
         return plusAndMinus(this, other, false);
     }
 
     // Умножене двух полиномов (результат помещается в третий полином)
-    Polynomial multiply(Polynomial other) {
+    public Polynomial multiply(Polynomial other) {
         List<Double> coeffThis = new ArrayList<>(coeff);
         List<Double> coeffOther = new ArrayList<>(other.coeff);
 
@@ -237,7 +238,7 @@ public final class Polynomial {
 
     // Деление двух полиномов (результат помещается в третий полином)
     // В зависимости от значения mode (/ или %) возвращается целая или дробная часть
-    Polynomial division(Polynomial other, char mode) {
+    public Polynomial division(Polynomial other, char mode) {
         if (mode != '/' && mode != '%')
             throw new IllegalArgumentException("mode: / or %");
 
