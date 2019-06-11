@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 найти остаток от деления одного полинома на другой.
 */
 
-public final class Polynomial {
+public class Polynomial {
     // Массив с коэффициентами полинома
     // Коэффициенты идут по убыванию степеней
     private List<Double> coeff = new ArrayList<>();
@@ -210,14 +210,10 @@ public final class Polynomial {
     }
 
     // Сложение двух полиномов (результат помещается в третий полином)
-    public Polynomial plus(Polynomial other) {
-        return plusAndMinus(this, other, true);
-    }
+    public Polynomial plus(Polynomial other) { return plusAndMinus(this, other, true); }
 
     // Вычитание двух полиномов (результат помещается в третий полином)
-    public Polynomial minus(Polynomial other) {
-        return plusAndMinus(this, other, false);
-    }
+    public Polynomial minus(Polynomial other) { return plusAndMinus(this, other, false); }
 
     // Умножене двух полиномов (результат помещается в третий полином)
     public Polynomial multiply(Polynomial other) {
